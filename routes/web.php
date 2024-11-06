@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Homepage
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
+
+// Projects
+Route::prefix('/admin')->name('admin.projects.')->group(function() {
+    // Create
+    Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('create');
+    // Store
+    Route::post('/projects', [AdminProjectController::class, 'store'])->name('store');
+    // Index
+    Route::get('/projects', [AdminProjectController::class, 'index'])->name('index');
+    // Show
+    Route::get('/projects/{project}', [AdminProjectController::class, 'show'])->name('show');
+    // Edit
+    Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])->name('edit');
+    // Update
+    Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('update');
+    // Delete
+    Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])->name('delete');
+
+    // Route::resource('projects', [AdminProjectController::class]);
+});
