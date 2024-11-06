@@ -20,7 +20,7 @@ class ProjectRequest extends FormRequest {
      */
     public function rules() : array {
         return [
-            'name' => ['required', 'string', 'min:1', 'max:250'],
+            'name' => ['required', 'string', 'min:1', 'max:250', 'unique:projects,name'],
             'description' => ['string', 'min:1', 'max:500']
         ];
     }

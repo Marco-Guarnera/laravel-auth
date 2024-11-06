@@ -38,5 +38,5 @@ Route::prefix('/admin')->name('admin.projects.')->group(function() {
     // Delete
     Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])->name('delete');
 
-    // Route::resource('projects', [AdminProjectController::class]);
+    // Route::resource('/projects', [AdminProjectController::class]);
 });
