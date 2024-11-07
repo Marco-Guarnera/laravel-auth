@@ -20,7 +20,7 @@ class ProjectController extends Controller {
 
     // Store
     public function store(StoreProjectRequest $request) {
-        $data_list = $request->validate();
+        $data_list = $request->validated();
         $project = Project::create($data_list);
         return redirect()->route('admin.projects.index');
     }
