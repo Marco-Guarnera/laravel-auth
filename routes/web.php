@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [AdminProjectController::class, 'index'])->name('index');
+
 Auth::routes();
 
 // Homepage
-Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Projects
 Route::prefix('/admin')->name('admin.projects.')->group(function() {

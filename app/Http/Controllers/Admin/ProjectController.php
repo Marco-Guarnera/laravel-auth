@@ -27,23 +27,23 @@ class ProjectController extends Controller {
 
     // Index
     public function index() {
-        $projects_list = Project::all();
+        $projects_list = Project::paginate(5);
         return view('admin.projects.index', compact('projects_list'));
     }
 
     // Show
     public function show(Project $project) {
-        return view('admin.projects.show', compact($project));
+        return view('admin.projects.show', compact('project'));
     }
 
     // Edit
     public function edit(Project $project) {
-        return view('admin.projects.edit', compact($project));
+        return view('admin.projects.edit', compact('project'));
     }
 
     // Update
     public function update(UpdateProjectRequest $request, Project $project) {
-        $data_list = $request->validate();
+        $data_list = $request->validated();
         $project->update($data_list);
         return redirect()->route('admin.projects.index');
     }
